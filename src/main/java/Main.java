@@ -83,11 +83,50 @@ void main() {
                 break;
             }
         } else if (choix == 4) {
-
+            SupprimerDocument();
+            choix = ent.nextInt();
+            if (choix == 1){
+                SupprimerLivre(repos);
+            } else if (choix == 2) {
+                SupprimerJournal(repos);
+            } else if (choix == 3) {
+                SupprimerMagazine(repos);
+            } else if (choix == 4) {
+                SupprimerCd_dvd(repos);
+            }else {
+                System.out.println("Choix invalide.");
+                break;
+            }
         } else if (choix == 5) {
-
+            EmprunterDocument();
+            choix= ent.nextInt();
+            if (choix == 1){
+                EmprunterLivre(repos);
+            } else if (choix == 2) {
+                EmprunterJournal(repos);
+            } else if (choix == 3) {
+                EmprunterMagazine(repos);
+            } else if (choix == 4) {
+                EmprunterCd_dvd(repos);
+            }else {
+                System.out.println("Choix invalide.");
+                break;
+            }
         } else if (choix == 6) {
-
+            RetournerDocument();
+            choix = ent.nextInt();
+            if (choix == 1){
+                RetournerLivre(repos);
+            } else if (choix == 2) {
+                RetournerJournal(repos);
+            } else if (choix == 3) {
+                RetournerMagazine(repos);
+            } else if (choix == 4) {
+                RetournerCd_dvd(repos);
+            }else {
+                System.out.println("Choix invalide.");
+                break;
+            }
         } else if (choix == 0) {
             System.out.println("Au revoir!");
             break;
@@ -225,7 +264,7 @@ public void ModifierLivre(DocumentListRepository repos){
     String titre = ent.nextLine();
 
     for (Document r : repos.load()){
-        if (r.getTitre() == titre || r instanceof Livre){
+        if (r.getTitre() == titre && r instanceof Livre){
             System.out.println("Saisir le titre du livre : ");
             String Titre = ent.next();
             System.out.println("Saisir le nom de l'auteur : ");
@@ -255,7 +294,7 @@ public void ModifierJournal(DocumentListRepository repos){
     String titre = ent.nextLine();
 
     for (Document d : repos.load()){
-        if (d instanceof Journal || d.getTitre() == titre){
+        if (d instanceof Journal && d.getTitre() == titre){
             System.out.println("Saisir le titre du Journal : ");
             String Titre = ent.next();
             System.out.println("Saisir le nom de l'auteur : ");
@@ -291,7 +330,7 @@ public void ModifierMagazine(DocumentListRepository repos){
     String titre = ent.nextLine();
 
     for (Document d : repos.load()){
-        if (d instanceof Magazine || d.getTitre() == titre){
+        if (d instanceof Magazine && d.getTitre() == titre){
             System.out.println("Saisir le titre du Magazine : ");
             String Titre = ent.next();
             System.out.println("Saisir le nom de l'auteur : ");
@@ -321,7 +360,7 @@ public void ModifierCd_dvd(DocumentListRepository repos){
     String titre = ent.nextLine();
 
     for (Document d : repos.load()){
-        if (d instanceof Cd_dvd || d.getTitre() == titre){
+        if (d instanceof Cd_dvd && d.getTitre() == titre){
             System.out.println("Saisir le titre du Disque : ");
             String Titre = ent.next();
             System.out.println("Saisir le nom de l'auteur : ");
@@ -341,6 +380,214 @@ public void ModifierCd_dvd(DocumentListRepository repos){
             System.out.println("Cd_dvd modifier avec succes.");
         }else {
             System.out.println("CD_dvd introuvable.");
+        }
+    }
+}
+
+public void SupprimerDocument(){
+    System.out.println("Saisir type document à Supprimer : ");
+    System.out.println("1. Livre ");
+    System.out.println("2. Journal ");
+    System.out.println("3. Magazine ");
+    System.out.println("4. Cd_dvd ");
+}
+
+public void SupprimerLivre(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Livre : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Livre && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Livre Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerJournal(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Journal : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Journal && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Journal Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerMagazine(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Magazine : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Magazine && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Magazine Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerCd_dvd(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Cd_dvd : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Cd_dvd && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Disque Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void EmprunterDocument(){
+    System.out.println("Saisir type document à emprunter : ");
+    System.out.println("1. Livre ");
+    System.out.println("2. Journal ");
+    System.out.println("3. Magazine ");
+    System.out.println("4. Cd_dvd ");
+}
+
+public void EmprunterLivre(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Livre : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Livre && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Disponible"){
+            ((Livre) d).changer_disponibilite();
+            System.out.println("Livre Emprunter avec succes.");
+            break;
+        }else if (d instanceof Livre && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Rupture de stock"){
+            System.out.println("Livre indisponible");
+        }
+    }
+}
+
+public void EmprunterJournal(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Journal : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Journal && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Disponible"){
+            ((Journal) d).changer_disponibilite();
+            System.out.println("Journal Emprunter avec succes.");
+            break;
+        }else if (d instanceof Journal && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Rupture de stock"){
+            System.out.println("Journal indisponible");
+        }
+    }
+}
+
+public void EmprunterMagazine(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Magazine : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Magazine && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Disponible"){
+            ((Magazine) d).changer_disponibilite();
+            System.out.println("Magazine Emprunter avec succes.");
+            break;
+        }else if (d instanceof Magazine && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Rupture de stock"){
+            System.out.println("Magazine indisponible");
+        }
+    }
+}
+
+public void EmprunterCd_dvd(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Cd_dvd : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Cd_dvd && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Disponible"){
+            ((Cd_dvd) d).changer_disponibilite();
+            System.out.println("Cd_dvd Emprunter avec succes.");
+            break;
+        }else if (d instanceof Cd_dvd && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Rupture de stock"){
+            System.out.println("Cd_dvd indisponible");
+        }
+    }
+}
+
+public void RetournerDocument(){
+    System.out.println("Saisir type document à retourner : ");
+    System.out.println("1. Livre ");
+    System.out.println("2. Journal ");
+    System.out.println("3. Magazine ");
+    System.out.println("4. Cd_dvd ");
+}
+
+public void RetournerLivre(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Livre : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Livre && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Rupture de stock"){
+            ((Livre) d).changer_disponibilite();
+            System.out.println("Livre Retourner avec succes.");
+            break;
+        }else if (d instanceof Livre && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Disponible"){
+            System.out.println("Livre pas Emprunter");
+        }
+    }
+}
+
+public void RetournerJournal(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Journal : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Journal && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Rupture de stock"){
+            ((Journal) d).changer_disponibilite();
+            System.out.println("Journal Retourner avec succes.");
+            break;
+        }else if (d instanceof Journal && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Disponible"){
+            System.out.println("Journal pas Emprunter");
+        }
+    }
+}
+
+public void RetournerMagazine(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Magazine : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Magazine && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Rupture de stock"){
+            ((Magazine) d).changer_disponibilite();
+            System.out.println("Magazine Retourner avec succes.");
+            break;
+        }else if (d instanceof Magazine && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Disponible"){
+            System.out.println("Magazine pas Emprunter");
+        }
+    }
+}
+
+public void RetournerCd_dvd(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir Titre du Cd_dvd : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Cd_dvd && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Rupture de stock"){
+            ((Cd_dvd) d).changer_disponibilite();
+            System.out.println("Cd_dvd Retourner avec succes.");
+            break;
+        }else if (d instanceof Cd_dvd && d.getTitre().equalsIgnoreCase(titre) && d.getDisponibilite() == "Disponible"){
+            System.out.println("Cd_dvd pas Emprunter");
         }
     }
 }
