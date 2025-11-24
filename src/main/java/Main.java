@@ -58,11 +58,11 @@ void main() {
             if (choix == 1){
                 AjoutLivre(repos);
             } else if (choix == 2) {
-
+                AjoutJournal(repos);
             } else if (choix == 3) {
-
+                AjoutMagazine(repos);
             } else if (choix == 4) {
-
+                AjoutCd_dvd(repos);
             }else {
                 System.out.println("Choix invalide.");
                 break;
@@ -143,9 +143,61 @@ public void AjoutJournal(DocumentListRepository repos){
     System.out.println("Saisir la disponibilité du Journal : ");
     String disponibilite = ent.nextLine();
     System.out.println("Saisir la date de parution du Journal au format (YYYY-MM-dd): ");
-    String date = ent.nextLine();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY/MM/dd");
-    LocalDate dat = LocalDate.parse(date, formatter);
+    System.out.print("Année : ");
+    int annee = ent.nextInt();
+    System.out.print("Mois : ");
+    int mois = ent.nextInt();
+    System.out.print("Jour : ");
+    int jour = ent.nextInt();
 
-    /*Journal.add(titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, dat);*/
+    LocalDate dat = LocalDate.of(annee, mois, jour);
+    Journal.add(new Journal( titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, dat));
+}
+
+public void AjoutMagazine(DocumentListRepository repos){
+    List<Document>Magazine = new ArrayList<>();
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir le titre du Magazine : ");
+    String titre = ent.next();
+    System.out.println("Saisir le nom de l'auteur : ");
+    String auteur = ent.nextLine();
+    System.out.println("Saisir le code du Magazine : ");
+    int code = ent.nextInt();
+    System.out.println("Saisir l'année de publication du Magazine : ");
+    int annee_publication = ent.nextInt();
+    System.out.println("Saisir le nombre d'exemplaire du Magazine : ");
+    int nombre_exemplaire = ent.nextInt();
+    System.out.println("Saisir la disponibilité du Magazine : ");
+    String disponibilite = ent.nextLine();
+    System.out.println("Saisir le numero d'édition du Magazine : ");
+    int numero_edition = ent.nextInt();
+
+    Magazine.add(new Magazine(titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, numero_edition));
+    repos.save(Magazine);
+}
+
+public void AjoutCd_dvd(DocumentListRepository repos){
+    List<Document>Cd_dvd = new ArrayList<>();
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir le titre du Disque : ");
+    String titre = ent.next();
+    System.out.println("Saisir le nom de l'auteur : ");
+    String auteur = ent.nextLine();
+    System.out.println("Saisir le code du Disque : ");
+    int code = ent.nextInt();
+    System.out.println("Saisir l'année de publication du Disque : ");
+    int annee_publication = ent.nextInt();
+    System.out.println("Saisir le nombre d'exemplaire du Disque : ");
+    int nombre_exemplaire = ent.nextInt();
+    System.out.println("Saisir la disponibilité du Disque : ");
+    String disponibilite = ent.nextLine();
+    System.out.println("Saisir la durée du Disque : ");
+    double duree = ent.nextDouble();
+
+    Cd_dvd.add(new Cd_dvd(titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, duree));
+    repos.save(Cd_dvd);
+}
+
+public void ModifierDoc(){
+
 }
