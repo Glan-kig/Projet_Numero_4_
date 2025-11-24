@@ -177,6 +177,7 @@ public void AjoutLivre(DocumentListRepository repos){
 
     Livre.add(new Livre(titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, nombre_page));
     repos.save(Livre);
+    System.out.println("Livre Ajouter avec succes.");
 }
 
 public void AjoutJournal(DocumentListRepository repos){
@@ -204,6 +205,8 @@ public void AjoutJournal(DocumentListRepository repos){
     LocalDate dat = LocalDate.of(annee, mois, jour);
 
     Journal.add(new Journal( titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, dat));
+    repos.save(Journal);
+    System.out.println("Journal Ajouter avec succes.");
 }
 
 public void AjoutMagazine(DocumentListRepository repos){
@@ -226,6 +229,7 @@ public void AjoutMagazine(DocumentListRepository repos){
 
     Magazine.add(new Magazine(titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, numero_edition));
     repos.save(Magazine);
+    System.out.println("Magazine Ajouter avec succes.");
 }
 
 public void AjoutCd_dvd(DocumentListRepository repos) {
@@ -248,6 +252,7 @@ public void AjoutCd_dvd(DocumentListRepository repos) {
 
     Cd_dvd.add(new Cd_dvd(titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, duree));
     repos.save(Cd_dvd);
+    System.out.println("Cd_dvd Ajouter avec succes.");
 }
 
 public void ModifierDoc(){
