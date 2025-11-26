@@ -1,20 +1,30 @@
 package dao;
 
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import entity.Document;
 
 import java.util.List;
 
-public class DocumentListRepository implements DocumentRepository{
-    private List<Document>documents;
+public class DocumentGsonRepository implements DocumentRepository{
+    private String filename;
+
+
+    public DocumentGsonRepository(String filename){
+
+    }
 
     @Override
     public void save(List<Document> documents) {
-        this.documents = documents;
+
     }
 
     @Override
     public List<Document> load() {
-        return this.documents;
+        return List.of();
     }
 
     @Override
