@@ -273,7 +273,7 @@ public void ModifierLivre(DocumentListRepository repos){
     String titre = ent.nextLine();
 
     for (Document r : repos.load()){
-        if (r.getTitre() == titre && r instanceof Livre){
+        if (r.getTitre().equalsIgnoreCase(titre) && r instanceof Livre){
             System.out.println("Saisir le titre du livre : ");
             String Titre = ent.next();
             System.out.println("Saisir le nom de l'auteur : ");
@@ -292,7 +292,7 @@ public void ModifierLivre(DocumentListRepository repos){
             int nombre_page = ent.nextInt();
 
             r = new Livre(Titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, nombre_page);
-            System.out.println("Journal modifier avec succes.");
+            System.out.println("Livre modifier avec succes.");
             break;
         }else if (r.getTitre() != titre && r instanceof Livre){
             System.out.println("Livre introuvable.");
@@ -306,7 +306,7 @@ public void ModifierJournal(DocumentListRepository repos){
     String titre = ent.nextLine();
 
     for (Document d : repos.load()){
-        if ( d.getTitre() == titre){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Journal){
             System.out.println("Saisir le titre du Journal : ");
             String Titre = ent.next();
             System.out.println("Saisir le nom de l'auteur : ");
@@ -344,7 +344,7 @@ public void ModifierMagazine(DocumentListRepository repos){
     String titre = ent.nextLine();
 
     for (Document d : repos.load()){
-        if ( d.getTitre() == titre && d instanceof Magazine){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Magazine){
             System.out.println("Saisir le titre du Magazine : ");
             String Titre = ent.next();
             System.out.println("Saisir le nom de l'auteur : ");
@@ -376,7 +376,7 @@ public void ModifierCd_dvd(DocumentListRepository repos){
     String titre = ent.nextLine();
 
     for (Document d : repos.load()){
-        if ( d.getTitre() == titre && d instanceof Cd_dvd){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Cd_dvd){
             System.out.println("Saisir le titre du Disque : ");
             String Titre = ent.next();
             System.out.println("Saisir le nom de l'auteur : ");
