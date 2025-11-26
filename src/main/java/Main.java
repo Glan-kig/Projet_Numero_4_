@@ -1,3 +1,4 @@
+import dao.DocumentFileRepository;
 import dao.DocumentListRepository;
 import entity.*;
 
@@ -130,6 +131,17 @@ void main() {
         } else if (choix == 0) {
             System.out.println("Au revoir!");
             break;
+        }else if (choix == 7){
+            AjoutFichier();
+            choix = ent.nextInt();
+            if (choix == 1){
+                AjoutFichierTxt(repos);
+            } else if (choix == 2) {
+                AjoutFichierGson(repos);
+            }else {
+                System.out.println("Choix invalide.");
+                break;
+            }
         }else {
             System.out.println("Choix invalide.");
             break;
@@ -146,6 +158,7 @@ public void Menu(){
     System.out.println("4. Supprimer Document ");
     System.out.println("5. Empruter Document ");
     System.out.println("6. Retourner Document ");
+    System.out.println("7. Importer information dans un fichier ");
     System.out.println("0. Quitter. ");
 }
 
@@ -608,4 +621,26 @@ public void RetournerCd_dvd(DocumentListRepository repos){
             System.out.println("Cd_dvd pas Emprunter");
         }
     }
+}
+
+public void AjoutFichier(){
+    System.out.println("Importer les donnees dans quel type de fichier ? ");
+    System.out.println("1. Texte");
+    System.out.println("2. Gson");
+}
+
+public void AjoutFichierTxt(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir le nom du fichier sans Extention! : ");
+    String filename = ent.nextLine() + ".txt";
+
+    List<Document>documents = repos.load();
+    DocumentFileRepository doc = new DocumentFileRepository(filename);
+    doc.save(documents);
+}
+
+public void AjoutFichierGson(DocumentListRepository repos){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisir le nom du fichier sans Extention! : ");
+
 }
