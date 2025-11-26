@@ -48,6 +48,8 @@ void main() {
 
     DocumentListRepository repos = new DocumentListRepository();
     repos.save(Doc);
+    DocumentFileRepository repoFile = new DocumentFileRepository("doc.txt");
+    DocumentGsonRepository repoGson = new DocumentGsonRepository("doc.json");
 
     while (true) {
         Menu();
@@ -55,9 +57,27 @@ void main() {
         int choix = ent.nextInt();
 
         if (choix == 1){
-            for (Document d : repos.load()){
-                d.information();
+            ModifierDoc();
+            choix = ent.nextInt();
+            if (choix == 1){
+                for (Document d : repos.load()){
+                    d.information();
+                }
+            } else if (choix == 2) {
+                List<Document>documents = repoFile.load();
+                for (Document d : documents){
+                System.out.println(d);
+                }
+            } else if (choix == 3) {
+                List<Document>documents = repoGson.load();
+                for (Document d : documents){
+                    System.out.println(d);
+                }
+            }else {
+                System.out.println("Choix invalide.");
+                break;
             }
+
         } else if (choix == 2) {
             AjoutDocument();
             choix = ent.nextInt();
@@ -74,35 +94,111 @@ void main() {
                 break;
             }
         } else if (choix == 3) {
-            ModifierDoc();
+            ModifierDocG();
             choix = ent.nextInt();
             if (choix == 1){
-                ModifierLivre(repos);
+                ModifierDoc();
+                choix = ent.nextInt();
+                if (choix == 1){
+                    ModifierLivre(repos);
+                } else if (choix == 2) {
+                    ModifierJournal(repos);
+                } else if (choix == 3) {
+                    ModifierMagazine(repos);
+                } else if (choix == 4) {
+                    ModifierCd_dvd(repos);
+                }else {
+                    System.out.println("Choix invalide.");
+                    break;
+                }
             } else if (choix == 2) {
-                ModifierJournal(repos);
+                ModifierDoc();
+                choix = ent.nextInt();
+                if (choix == 1){
+
+                } else if (choix == 2) {
+
+                } else if (choix == 3) {
+
+                } else if (choix == 4) {
+
+                }else {
+                    System.out.println("Choix invalide.");
+                    break;
+                }
             } else if (choix == 3) {
-                ModifierMagazine(repos);
-            } else if (choix == 4) {
-                ModifierCd_dvd(repos);
+                ModifierDoc();
+                choix = ent.nextInt();
+                if (choix == 1){
+
+                } else if (choix == 2) {
+
+                } else if (choix == 3) {
+
+                } else if (choix == 4) {
+
+                }else {
+                    System.out.println("Choix invalide.");
+                    break;
+                }
             }else {
                 System.out.println("Choix invalide.");
                 break;
             }
+
         } else if (choix == 4) {
-            SupprimerDocument();
+            SupprimerDocumentG();
             choix = ent.nextInt();
             if (choix == 1){
-                SupprimerLivre(repos);
+                SupprimerDocument();
+                choix = ent.nextInt();
+                if (choix == 1){
+                    SupprimerLivre(repos);
+                } else if (choix == 2) {
+                    SupprimerJournal(repos);
+                } else if (choix == 3) {
+                    SupprimerMagazine(repos);
+                } else if (choix == 4) {
+                    SupprimerCd_dvd(repos);
+                }else {
+                    System.out.println("Choix invalide.");
+                    break;
+                }
             } else if (choix == 2) {
-                SupprimerJournal(repos);
+                SupprimerDocument();
+                choix = ent.nextInt();
+                if (choix == 1){
+
+                } else if (choix == 2) {
+
+                } else if (choix == 3) {
+
+                } else if (choix == 4) {
+
+                }else {
+                    System.out.println("Choix invalide.");
+                    break;
+                }
             } else if (choix == 3) {
-                SupprimerMagazine(repos);
-            } else if (choix == 4) {
-                SupprimerCd_dvd(repos);
+                SupprimerDocument();
+                choix = ent.nextInt();
+                if (choix == 1){
+
+                } else if (choix == 2) {
+
+                } else if (choix == 3) {
+
+                } else if (choix == 4) {
+
+                }else {
+                    System.out.println("Choix invalide.");
+                    break;
+                }
             }else {
                 System.out.println("Choix invalide.");
                 break;
             }
+
         } else if (choix == 5) {
             EmprunterDocument();
             choix= ent.nextInt();
@@ -277,12 +373,19 @@ public void AjoutCd_dvd(DocumentListRepository repos, List<Document>documents) {
     System.out.println("Cd_dvd Ajouter avec succes.");
 }
 
-public void ModifierDoc(){
+public void ModifierDocG(){
     System.out.println("Saisir type document à modifier : ");
     System.out.println("1. Livre ");
     System.out.println("2. Journal ");
     System.out.println("3. Magazine ");
     System.out.println("4. Cd_dvd ");
+}
+
+public void ModifierDoc(){
+    System.out.println("Saisir le type de stockage : ");
+    System.out.println("1. List ");
+    System.out.println("2. Texte ");
+    System.out.println("3. Json ");
 }
 
 public void ModifierLivre(DocumentListRepository repos){
@@ -420,12 +523,19 @@ public void ModifierCd_dvd(DocumentListRepository repos){
     }
 }
 
-public void SupprimerDocument(){
+public void SupprimerDocumentG(){
     System.out.println("Saisir type document à Supprimer : ");
     System.out.println("1. Livre ");
     System.out.println("2. Journal ");
     System.out.println("3. Magazine ");
     System.out.println("4. Cd_dvd ");
+}
+
+public void SupprimerDocument(){
+    System.out.println("Saisir le type de stockage : ");
+    System.out.println("1. List ");
+    System.out.println("2. Texte ");
+    System.out.println("3. Json ");
 }
 
 public void SupprimerLivre(DocumentListRepository repos){
@@ -668,5 +778,23 @@ public void AjoutFichierGson(DocumentListRepository repos){
     } catch (Exception e) {
         System.out.println("Erreur lors de la creation du fichier");
     }
+
+}
+
+public void AfficherInfoTxt(DocumentFileRepository repos){
+    List<Document>documents = repos.load();
+    for (Document d : documents){
+        System.out.println(d);
+    }
+}
+
+public void AfficherInfoGson(DocumentGsonRepository repos){
+    List<Document>documents = repos.load();
+    for (Document d : documents){
+        System.out.println(d);
+    }
+}
+
+public void ModifierLivreTxt(DocumentFileRepository repos){
 
 }
