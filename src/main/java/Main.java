@@ -1,9 +1,14 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dao.DocumentFileRepository;
+import dao.DocumentGsonRepository;
 import dao.DocumentListRepository;
 import entity.*;
+import gestion.LocalDateAdapter;
 
 void main() {
     List<Document> Doc = new ArrayList<>();
+    Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
     Doc.add(new Livre(
             "Life",
             "Gilkay",
@@ -634,7 +639,10 @@ public void AjoutFichierTxt(DocumentListRepository repos){
     System.out.println("Saisir le nom du fichier sans Extention! : ");
     String filename = ent.nextLine() + ".txt";
 
-    List<Document>documents = repos.load();
+    List<Document>documents = new ArrayList<>();
+    for (Document d : repos.load()){
+        documents.add(d);
+    }
     DocumentFileRepository doc = new DocumentFileRepository(filename);
     doc.save(documents);
 }
@@ -642,5 +650,12 @@ public void AjoutFichierTxt(DocumentListRepository repos){
 public void AjoutFichierGson(DocumentListRepository repos){
     Scanner ent = new Scanner(System.in);
     System.out.println("Saisir le nom du fichier sans Extention! : ");
+    String filename = ent.nextLine() + ".json";
 
+    List<Document>documents = new ArrayList<>();
+    for (Document d : repos.load()){
+        documents.add(d);
+    }
+    DocumentGsonRepository doc = new DocumentGsonRepository(filename);
+    doc.save(documents);
 }

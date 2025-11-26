@@ -1,9 +1,14 @@
 package entity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import gestion.LocalDateAdapter;
+
 import java.time.LocalDate;
 
 public class Journal extends Document implements Disponibilisant{
     private LocalDate date_parution;
+    private Gson gson;
 
     public Journal(String titre, String auteur, int code, int annee_publication, int nombre_exemplaire, String disponibilite, LocalDate date_parution) {
         super(titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite);

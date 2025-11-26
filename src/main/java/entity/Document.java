@@ -1,6 +1,8 @@
 package entity;
 
-public abstract class Document {
+import java.io.Serializable;
+
+public abstract class Document implements Serializable {
     protected String titre;
     protected String auteur;
     protected int code;
