@@ -14,8 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class DocumentGsonRepository implements DocumentRepository{
-    private String filename;
-    private Gson gson;
+    private final String filename;
+    private final Gson gson;
 
     public DocumentGsonRepository(String filename){
         this.filename = filename;

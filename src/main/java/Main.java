@@ -643,8 +643,13 @@ public void AjoutFichierTxt(DocumentListRepository repos){
     for (Document d : repos.load()){
         documents.add(d);
     }
-    DocumentFileRepository doc = new DocumentFileRepository(filename);
-    doc.save(documents);
+    try {
+        DocumentFileRepository doc = new DocumentFileRepository(filename);
+        doc.save(documents);
+        System.out.println("Fichier creer avec succes!");
+    }catch (Exception e){
+        System.out.println("Erreur lors de la creation du fichier");
+    }
 }
 
 public void AjoutFichierGson(DocumentListRepository repos){
@@ -656,6 +661,12 @@ public void AjoutFichierGson(DocumentListRepository repos){
     for (Document d : repos.load()){
         documents.add(d);
     }
-    DocumentGsonRepository doc = new DocumentGsonRepository(filename);
-    doc.save(documents);
+    try {
+        DocumentGsonRepository doc = new DocumentGsonRepository(filename);
+        doc.save(documents);
+        System.out.println("Fichier creer avec succes!");
+    } catch (Exception e) {
+        System.out.println("Erreur lors de la creation du fichier");
+    }
+
 }
