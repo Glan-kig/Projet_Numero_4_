@@ -43,6 +43,7 @@ void main() {
     repos.save(Doc);
 
     DocumentFileRepository repoFile = new DocumentFileRepository("doc.txt");
+    DocumentGsonRepository repoGson = new DocumentGsonRepository("doc.json");
 
     while (true) {
         Menu();
@@ -90,13 +91,13 @@ void main() {
                 ModifierDoc();
                 choix = ent.nextInt();
                 if (choix == 1){
-
+                    ModifierLivreTxt();
                 } else if (choix == 2) {
-
+                    ModifierJournalTxt();
                 } else if (choix == 3) {
-
+                    ModifierMagazineTxt();
                 } else if (choix == 4) {
-
+                    ModifierCd_dvdTxt();
                 }else {
                     System.out.println("Choix invalide.");
                     break;
@@ -105,13 +106,13 @@ void main() {
                 ModifierDoc();
                 choix = ent.nextInt();
                 if (choix == 1){
-
+                    ModifierLivreGson();
                 } else if (choix == 2) {
-
+                    ModifierJournalGson();
                 } else if (choix == 3) {
-
+                    ModifierMagazineGson();
                 } else if (choix == 4) {
-
+                    ModifierCd_dvdGson();
                 }else {
                     System.out.println("Choix invalide.");
                     break;
@@ -143,13 +144,13 @@ void main() {
                 SupprimerDocument();
                 choix = ent.nextInt();
                 if (choix == 1){
-
+                    SupprimerLivreTxt();
                 } else if (choix == 2) {
-
+                    SupprimerJournalTxt();
                 } else if (choix == 3) {
-
+                    SupprimerMagazineTxt();
                 } else if (choix == 4) {
-
+                    SupprimerCd_dvdTxt();
                 }else {
                     System.out.println("Choix invalide.");
                     break;
@@ -158,13 +159,13 @@ void main() {
                 SupprimerDocument();
                 choix = ent.nextInt();
                 if (choix == 1){
-
+                    SupprimerLivreGson();
                 } else if (choix == 2) {
-
+                    SupprimerJournalGson();
                 } else if (choix == 3) {
-
+                    SupprimerMagazineGson();
                 } else if (choix == 4) {
-
+                    SupprimerCd_dvdGson();
                 }else {
                     System.out.println("Choix invalide.");
                     break;
@@ -758,18 +759,450 @@ public void AjoutFichierGson(DocumentListRepository repos){
 
 public void AfficherInfoTxt(DocumentFileRepository repos){
     List<Document>documents = repos.load();
-    for (Document d : documents){
-        System.out.println(d);
+    try {
+        for (Document d : documents){
+            System.out.println(d);
+        }
+    } catch (Exception e) {
+
     }
 }
 
 public void AfficherInfoGson(DocumentGsonRepository repos){
     List<Document>documents = repos.load();
-    for (Document d : documents){
-        System.out.println(d);
+    try {
+        for (Document d : documents){
+            System.out.println(d);
+        }
+    }catch (Exception e){
+
     }
 }
 
-public void ModifierLivreTxt(DocumentFileRepository repos){
+public void ModifierLivreTxt(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".txt";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Livre : ");
+    String titre = ent.nextLine();
 
+    for (Document d : repos.load()){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Livre){
+            System.out.println("Saisir le titre du Livre : ");
+            String Titre = ent.next();
+            System.out.println("Saisir le nom de l'auteur : ");
+            String auteur = ent.nextLine();
+            auteur = ent.nextLine();
+            System.out.println("Saisir le code du Livre : ");
+            int code = ent.nextInt();
+            System.out.println("Saisir l'année de publication du Livre : ");
+            int annee_publication = ent.nextInt();
+            System.out.println("Saisir le nombre d'exemplaire du Livre : ");
+            int nombre_exemplaire = ent.nextInt();
+            System.out.println("Saisir la disponibilité du Livre : ");
+            String disponibilite = ent.nextLine();
+            disponibilite = ent.nextLine();
+            System.out.println("Saisir la durée du Livre : ");
+            int nombre_page = ent.nextInt();
+
+            d = new Livre(Titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, nombre_page);
+            System.out.println("Livre modifier avec succes.");
+        }else {
+            System.out.println("Livre introuvable.");
+        }
+    }
+}
+
+public void ModifierJournalTxt(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".txt";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Journal : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Journal){
+            System.out.println("Saisir le titre du Journal : ");
+            String Titre = ent.next();
+            System.out.println("Saisir le nom de l'auteur : ");
+            String auteur = ent.nextLine();
+            auteur = ent.nextLine();
+            System.out.println("Saisir le code du Journal : ");
+            int code = ent.nextInt();
+            System.out.println("Saisir l'année de publication du Journal : ");
+            int annee_publication = ent.nextInt();
+            System.out.println("Saisir le nombre d'exemplaire du Journal : ");
+            int nombre_exemplaire = ent.nextInt();
+            System.out.println("Saisir la disponibilité du Journal : ");
+            String disponibilite = ent.nextLine();
+            disponibilite = ent.nextLine();
+            System.out.println("Saisir la date de parution du Journal au format (YYYY-MM-dd): ");
+            System.out.print("Année : ");
+            int annee = ent.nextInt();
+            System.out.print("Mois : ");
+            int mois = ent.nextInt();
+            System.out.print("Jour : ");
+            int jour = ent.nextInt();
+            LocalDate dat = LocalDate.of(annee, mois, jour);
+
+            d = new Journal(Titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, dat);
+            System.out.println("Journal modifier avec succes.");
+        }else {
+            System.out.println("Journal introuvable.");
+        }
+    }
+}
+
+public void ModifierMagazineTxt(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".txt";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Magazine : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Magazine){
+            System.out.println("Saisir le titre du Magazine : ");
+            String Titre = ent.next();
+            System.out.println("Saisir le nom de l'auteur : ");
+            String auteur = ent.nextLine();
+            auteur = ent.nextLine();
+            System.out.println("Saisir le code du Magazine : ");
+            int code = ent.nextInt();
+            System.out.println("Saisir l'année de publication du Magazine : ");
+            int annee_publication = ent.nextInt();
+            System.out.println("Saisir le nombre d'exemplaire du Magazine : ");
+            int nombre_exemplaire = ent.nextInt();
+            System.out.println("Saisir la disponibilité du Magazine : ");
+            String disponibilite = ent.nextLine();
+            disponibilite = ent.nextLine();
+            System.out.println("Saisir  d'édition du Magazine : ");
+            int numero_edition = ent.nextInt();
+
+            d = new Magazine(Titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, numero_edition);
+            System.out.println("Magazine Modifier avec succes.");
+        }else {
+            System.out.println("Magazine introuvable.");
+        }
+    }
+}
+
+public void ModifierCd_dvdTxt(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".txt";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Cd_dvd : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Cd_dvd){
+            System.out.println("Saisir le titre du Disque : ");
+            String Titre = ent.next();
+            System.out.println("Saisir le nom de l'auteur : ");
+            String auteur = ent.nextLine();
+            auteur = ent.nextLine();
+            System.out.println("Saisir le code du Disque : ");
+            int code = ent.nextInt();
+            System.out.println("Saisir l'année de publication du Disque : ");
+            int annee_publication = ent.nextInt();
+            System.out.println("Saisir le nombre d'exemplaire du Disque : ");
+            int nombre_exemplaire = ent.nextInt();
+            System.out.println("Saisir la disponibilité du Disque : ");
+            String disponibilite = ent.nextLine();
+            disponibilite = ent.nextLine();
+            System.out.println("Saisir la durée du Disque : ");
+            double duree = ent.nextDouble();
+
+            d = new Cd_dvd(Titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, duree);
+            System.out.println("Cd_dvd modifier avec succes.");
+        }else {
+            System.out.println("CD_dvd introuvable.");
+        }
+    }
+}
+
+public void ModifierLivreGson(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".json";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Livre : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Livre){
+            System.out.println("Saisir le titre du Livre : ");
+            String Titre = ent.next();
+            System.out.println("Saisir le nom de l'auteur : ");
+            String auteur = ent.nextLine();
+            auteur = ent.nextLine();
+            System.out.println("Saisir le code du Livre : ");
+            int code = ent.nextInt();
+            System.out.println("Saisir l'année de publication du Livre : ");
+            int annee_publication = ent.nextInt();
+            System.out.println("Saisir le nombre d'exemplaire du Livre : ");
+            int nombre_exemplaire = ent.nextInt();
+            System.out.println("Saisir la disponibilité du Livre : ");
+            String disponibilite = ent.nextLine();
+            disponibilite = ent.nextLine();
+            System.out.println("Saisir la durée du Livre : ");
+            int nombre_page = ent.nextInt();
+
+            d = new Livre(Titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, nombre_page);
+            System.out.println("Livre modifier avec succes.");
+        }else {
+            System.out.println("Livre introuvable.");
+        }
+    }
+}
+
+public void ModifierJournalGson(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".json";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Journal : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Journal){
+            System.out.println("Saisir le titre du Journal : ");
+            String Titre = ent.next();
+            System.out.println("Saisir le nom de l'auteur : ");
+            String auteur = ent.nextLine();
+            auteur = ent.nextLine();
+            System.out.println("Saisir le code du Journal : ");
+            int code = ent.nextInt();
+            System.out.println("Saisir l'année de publication du Journal : ");
+            int annee_publication = ent.nextInt();
+            System.out.println("Saisir le nombre d'exemplaire du Journal : ");
+            int nombre_exemplaire = ent.nextInt();
+            System.out.println("Saisir la disponibilité du Journal : ");
+            String disponibilite = ent.nextLine();
+            disponibilite = ent.nextLine();
+            System.out.println("Saisir la date de parution du Journal au format (YYYY-MM-dd): ");
+            System.out.print("Année : ");
+            int annee = ent.nextInt();
+            System.out.print("Mois : ");
+            int mois = ent.nextInt();
+            System.out.print("Jour : ");
+            int jour = ent.nextInt();
+            LocalDate dat = LocalDate.of(annee, mois, jour);
+
+            d = new Journal(Titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, dat);
+            System.out.println("Journal modifier avec succes.");
+        }else {
+            System.out.println("Journal introuvable.");
+        }
+    }
+}
+
+public void ModifierMagazineGson(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".json";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Magazine : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Magazine){
+            System.out.println("Saisir le titre du Magazine : ");
+            String Titre = ent.next();
+            System.out.println("Saisir le nom de l'auteur : ");
+            String auteur = ent.nextLine();
+            auteur = ent.nextLine();
+            System.out.println("Saisir le code du Magazine : ");
+            int code = ent.nextInt();
+            System.out.println("Saisir l'année de publication du Magazine : ");
+            int annee_publication = ent.nextInt();
+            System.out.println("Saisir le nombre d'exemplaire du Magazine : ");
+            int nombre_exemplaire = ent.nextInt();
+            System.out.println("Saisir la disponibilité du Magazine : ");
+            String disponibilite = ent.nextLine();
+            disponibilite = ent.nextLine();
+            System.out.println("Saisir  d'édition du Magazine : ");
+            int numero_edition = ent.nextInt();
+
+            d = new Magazine(Titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, numero_edition);
+            System.out.println("Magazine Modifier avec succes.");
+        }else {
+            System.out.println("Magazine introuvable.");
+        }
+    }
+}
+
+public void ModifierCd_dvdGson(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".json";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Cd_dvd : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if ( d.getTitre().equalsIgnoreCase(titre) && d instanceof Cd_dvd){
+            System.out.println("Saisir le titre du Disque : ");
+            String Titre = ent.next();
+            System.out.println("Saisir le nom de l'auteur : ");
+            String auteur = ent.nextLine();
+            auteur = ent.nextLine();
+            System.out.println("Saisir le code du Disque : ");
+            int code = ent.nextInt();
+            System.out.println("Saisir l'année de publication du Disque : ");
+            int annee_publication = ent.nextInt();
+            System.out.println("Saisir le nombre d'exemplaire du Disque : ");
+            int nombre_exemplaire = ent.nextInt();
+            System.out.println("Saisir la disponibilité du Disque : ");
+            String disponibilite = ent.nextLine();
+            disponibilite = ent.nextLine();
+            System.out.println("Saisir la durée du Disque : ");
+            double duree = ent.nextDouble();
+
+            d = new Cd_dvd(Titre, auteur, code, annee_publication, nombre_exemplaire, disponibilite, duree);
+            System.out.println("Cd_dvd modifier avec succes.");
+        }else {
+            System.out.println("CD_dvd introuvable.");
+        }
+    }
+}
+
+public void SupprimerLivreTxt(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".txt";
+    DocumentFileRepository repos = new DocumentFileRepository(filename);
+    System.out.println("Saisir Titre du Livre : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Livre && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Livre Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerJournalTxt(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".txt";
+    DocumentFileRepository repos = new DocumentFileRepository(filename);
+    System.out.println("Saisir Titre du Journal : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Journal && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Journal Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerMagazineTxt(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".txt";
+    DocumentFileRepository repos = new DocumentFileRepository(filename);
+    System.out.println("Saisir Titre du Magazine : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Magazine && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Magazine Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerCd_dvdTxt(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".txt";
+    DocumentFileRepository repos = new DocumentFileRepository(filename);
+    System.out.println("Saisir Titre du Cd_dvd : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Cd_dvd && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Disque Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerLivreGson(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".json";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Livre : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Livre && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Livre Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerJournalGson(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".json";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Journal : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Journal && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Journal Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerMagazineGson(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".json";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Magazine : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Magazine && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Magazine Supprimer avec succes.");
+            break;
+        }
+    }
+}
+
+public void SupprimerCd_dvdGson(){
+    Scanner ent = new Scanner(System.in);
+    System.out.println("Saisire le nom du fichier sans Extention : ");
+    String filename = ent.nextLine() + ".json";
+    DocumentGsonRepository repos = new DocumentGsonRepository(filename);
+    System.out.println("Saisir Titre du Cd_dvd : ");
+    String titre = ent.nextLine();
+
+    for (Document d : repos.load()){
+        if (d instanceof Cd_dvd && d.getTitre().equalsIgnoreCase(titre)){
+            repos.load().remove(d);
+            System.out.println("Disque Supprimer avec succes.");
+            break;
+        }
+    }
 }
