@@ -27,15 +27,6 @@ void main() {
             "Rupture de stock",
             01
     ));
-    Doc.add(new Journal(
-            "J1",
-            "JJ",
-            03,
-            2000,
-            20,
-            "Disponibilité",
-            LocalDate.of(2000, 11, 22)
-    ));
     Doc.add(new Cd_dvd(
             "D1",
             "DD",
@@ -49,7 +40,6 @@ void main() {
     DocumentListRepository repos = new DocumentListRepository();
     repos.save(Doc);
     DocumentFileRepository repoFile = new DocumentFileRepository("doc.txt");
-    DocumentGsonRepository repoGson = new DocumentGsonRepository("doc.json");
 
     while (true) {
         Menu();
@@ -69,10 +59,8 @@ void main() {
                 System.out.println(d);
                 }
             } else if (choix == 3) {
-                List<Document>documents = repoGson.load();
-                for (Document d : documents){
-                    System.out.println(d);
-                }
+
+
             }else {
                 System.out.println("Choix invalide.");
                 break;
