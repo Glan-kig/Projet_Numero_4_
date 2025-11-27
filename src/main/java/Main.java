@@ -123,10 +123,10 @@ void main() {
             }
 
         } else if (choix == 4) {
-            SupprimerDocumentG();
+            SupprimerDocument();
             choix = ent.nextInt();
             if (choix == 1){
-                SupprimerDocument();
+                SupprimerDocumentG();
                 choix = ent.nextInt();
                 if (choix == 1){
                     SupprimerLivre(repos);
@@ -141,7 +141,7 @@ void main() {
                     break;
                 }
             } else if (choix == 2) {
-                SupprimerDocument();
+                SupprimerDocumentG();
                 choix = ent.nextInt();
                 if (choix == 1){
                     SupprimerLivreTxt();
@@ -156,7 +156,7 @@ void main() {
                     break;
                 }
             } else if (choix == 3) {
-                SupprimerDocument();
+                SupprimerDocumentG();
                 choix = ent.nextInt();
                 if (choix == 1){
                     SupprimerLivreGson();
