@@ -18,6 +18,7 @@ void main() {
             "Disponible",
             450
     ));
+    
     Doc.add(new Magazine(
             "M1",
             "Glk",
@@ -27,6 +28,7 @@ void main() {
             "Rupture de stock",
             01
     ));
+
     Doc.add(new Cd_dvd(
             "D1",
             "DD",
