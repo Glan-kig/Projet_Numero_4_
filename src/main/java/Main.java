@@ -18,7 +18,7 @@ void main() {
             "Disponible",
             450
     ));
-    
+
     Doc.add(new Magazine(
             "M1",
             "Glk",
@@ -50,25 +50,9 @@ void main() {
         int choix = ent.nextInt();
 
         if (choix == 1){
-            ModifierDoc();
-            choix = ent.nextInt();
-            if (choix == 1){
-                for (Document d : repos.load()){
-                    d.information();
-                }
-            } else if (choix == 2) {
-                List<Document>documents = repoFile.load();
-                for (Document d : documents){
-                System.out.println(d);
-                }
-            } else if (choix == 3) {
-
-
-            }else {
-                System.out.println("Choix invalide.");
-                break;
+            for (Document d : repos.load()){
+                d.information();
             }
-
         } else if (choix == 2) {
             AjoutDocument();
             choix = ent.nextInt();
